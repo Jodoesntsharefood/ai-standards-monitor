@@ -2,8 +2,10 @@ name: Monitor AI Standards
 
 on:
   schedule:
+    # 每6小时运行一次
     - cron: '0 */6 * * *'
 
+  # 支持手动运行
   workflow_dispatch:
 
 jobs:
@@ -11,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Python
@@ -19,25 +21,29 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Install Playwright browser
+        run: |
           playwright install chromium
 
-      - name: Run monitor
+      - name: Run monitor script
         env:
-          GMAIL_USER: ${{ secrets.GMAIL_USER }}
-          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           TO_EMAIL: ${{ secrets.TO_EMAIL }}
-        run: python monitor.py
+        run: |
+          python monitor.py
 
-      - name: Commit status file
+      - name: Commit updated status
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
 
           git add last_status.txt
 
-          git diff --cached --quiet || git commit -m "Update status"
+          git diff --cached --quiet || git commit -m "Update monitored status"
 
           git push
