@@ -3,14 +3,15 @@ import json
 import requests
 from playwright.sync_api import sync_playwright
 
-URL = "https://standards.cencenelec.eu/ords/f?p=205:22::::::&cs=117B8E8682150D42818988EEE05C945D6"
+URL = "https://standards.cencenelec.eu/ords/f?p=205:22:::::FSP_ORG_ID,FSP_LANG_ID:2916257,25&cs=114251C6C0B684FBBC069923513BF6348"
 
-TARGET_TEXT = "CEN/CLC/JTC 21 - Artificial Intelligence"
-
-STATUS_FILE = "last_status.txt"
+STATUS_FILE = "last_status.json"
 
 
-def get_current_status():
+# 提取表格中的 status
+def get_current_statuses():
+    results = {}
+
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
 
@@ -18,96 +19,155 @@ def get_current_status():
 
         page.goto(URL, wait_until="networkidle", timeout=120000)
 
-        page.wait_for_timeout(5000)
+        page.wait_for_timeout(8000)
 
-        body_text = page.inner_text("body")
+        # 获取所有表格行
+        rows = page.locator("table tr")
+
+        count = rows.count()
+
+        print(f"Found rows: {count}")
+
+        status_candidates = [
+            "Preliminary",
+            "Under Drafting",
+            "Under Approval",
+            "Under Enquiry",
+            "Published",
+            "Withdrawn",
+        ]
+
+        for i in range(count):
+            row = rows.nth(i)
+
+            text = row.inner_text().strip()
+
+            if not text:
+                continue
+
+            columns = [c.strip() for c in text.split("\n") if c.strip()]
+
+            if len(columns) < 2:
+                continue
+
+            work_item = columns[0]
+
+            detected_status = None
+
+            for col in columns:
+                for status in status_candidates:
+                    if status.lower() in col.lower():
+                        detected_status = status
+                        break
+
+                if detected_status:
+                    break
+
+            if detected_status:
+                results[work_item] = detected_status
 
         browser.close()
 
-    lines = body_text.splitlines()
-
-    found_target = False
-
-    for line in lines:
-        if TARGET_TEXT in line:
-            found_target = True
-
-        if found_target and "status" in line.lower():
-            return line.strip()
-
-    return "STATUS_NOT_FOUND"
+    return results
 
 
-def load_old_status():
+# 读取历史状态
+def load_old_statuses():
     if not os.path.exists(STATUS_FILE):
-        return ""
+        return {}
 
     with open(STATUS_FILE, "r", encoding="utf-8") as f:
-        return f.read().strip()
+        return json.load(f)
 
 
-def save_status(status):
+# 保存状态
+def save_statuses(statuses):
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
-        f.write(status)
+        json.dump(statuses, f, indent=2, ensure_ascii=False)
 
 
-def send_email(old_status, new_status):
+# 对比变化
+def compare_statuses(old, new):
+    changes = []
+
+    all_keys = set(old.keys()) | set(new.keys())
+
+    for key in all_keys:
+        old_status = old.get(key)
+        new_status = new.get(key)
+
+        if old_status != new_status:
+            changes.append((key, old_status, new_status))
+
+    return changes
+
+
+# 发送邮件
+def send_email(changes):
     resend_api_key = os.environ["RESEND_API_KEY"]
 
     to_email = os.environ["TO_EMAIL"]
+
+    html = "<h2>CEN/CLC/JTC 21 Status Changes</h2>"
+
+    for item, old_status, new_status in changes:
+        html += f"""
+        <hr>
+        <p><strong>Item:</strong> {item}</p>
+        <p><strong>Old:</strong> {old_status}</p>
+        <p><strong>New:</strong> {new_status}</p>
+        """
+
+    html += f"""
+    <br>
+    <a href="{URL}">Open Standards Page</a>
+    """
+
+    payload = {
+        "from": "AI Standards Monitor <onboarding@resend.dev>",
+        "to": [to_email],
+        "subject": "[AI Standards Alert] Status Changed",
+        "html": html,
+    }
 
     headers = {
         "Authorization": f"Bearer {resend_api_key}",
         "Content-Type": "application/json",
     }
 
-    payload = {
-        "from": "AI Standards Monitor <onboarding@resend.dev>",
-        "to": [to_email],
-        "subject": "[AI Standards Alert] Status Changed",
-        "html": f"""
-        <h2>CEN/CLC/JTC 21 - Artificial Intelligence</h2>
-
-        <p>Status changed detected.</p>
-
-        <p><strong>Old Status:</strong><br>{old_status}</p>
-
-        <p><strong>New Status:</strong><br>{new_status}</p>
-
-        <p>
-        <a href="{URL}">Open Standards Page</a>
-        </p>
-        """
-    }
-
     response = requests.post(
         "https://api.resend.com/emails",
         headers=headers,
-        data=json.dumps(payload)
+        json=payload,
     )
 
     print(response.status_code)
     print(response.text)
 
 
+# 主程序
 def main():
-    current_status = get_current_status()
+    current_statuses = get_current_statuses()
 
-    print("Current:", current_status)
+    print("Current statuses:")
+    print(json.dumps(current_statuses, indent=2, ensure_ascii=False))
 
-    old_status = load_old_status()
+    old_statuses = load_old_statuses()
 
-    print("Old:", old_status)
+    changes = compare_statuses(old_statuses, current_statuses)
 
-    if current_status != old_status:
-        print("Status changed")
+    if changes:
+        print("Changes detected:")
 
-        send_email(old_status, current_status)
+        for c in changes:
+            print(c)
 
-        save_status(current_status)
+        send_email(changes)
+
+        save_statuses(current_statuses)
 
     else:
-        print("No change")
+        print("No changes")
 
 
 if __name__ == "__main__":
