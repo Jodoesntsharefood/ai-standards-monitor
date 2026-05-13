@@ -183,8 +183,8 @@ def main():
 
         save_statuses(current_statuses)
 
-else:
-    print("No changes")
+    else:
+        print("No changes")
 
 if __name__ == "__main__":
     main()
