@@ -156,19 +156,35 @@ def main():
 
     changes = compare_statuses(old_statuses, current_statuses)
 
-    if changes:
-        print("Changes detected:")
+#    if changes:
+#        print("Changes detected:")
+#
+#        for c in changes:
+#            print(c)
+#
+#        send_email(changes)
+#
+#        save_statuses(current_statuses)
+#
+#    else:
+#        print("No changes")
+    if old_statuses and changes:
+    print("Changes detected:")
 
-        for c in changes:
-            print(c)
+    for c in changes:
+        print(c)
 
-        send_email(changes)
+    send_email(changes)
 
-        save_statuses(current_statuses)
+    save_statuses(current_statuses)
 
-    else:
-        print("No changes")
+elif not old_statuses:
+    print("First run, saving initial statuses only")
 
+    save_statuses(current_statuses)
+
+else:
+    print("No changes")
 
 if __name__ == "__main__":
     main()
