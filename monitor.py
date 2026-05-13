@@ -106,8 +106,8 @@ def compare_statuses(old, new):
 def send_email(changes):
     resend_api_key = os.environ["RESEND_API_KEY"]
 
-    to_email = os.environ["TO_EMAIL"]
-
+    to_emails = os.environ["TO_EMAILS"].split(",")
+    
     html = "<h2>CEN/CLC/JTC 21 Status Changes</h2>"
 
     for item, old_status, new_status in changes:
@@ -125,7 +125,7 @@ def send_email(changes):
 
     payload = {
         "from": "AI Standards Monitor <onboarding@resend.dev>",
-        "to": [to_email],
+        "to": to_emails,
         "subject": "[AI Standards Alert] Status Changed",
         "html": html,
     }
