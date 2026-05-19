@@ -168,7 +168,7 @@ def main():
 #
 #    else:
 #        print("No changes")
-    if changes:
+    if old_statuses and changes:
         print("Changes detected:")
 
         for c in changes:
@@ -185,6 +185,8 @@ def main():
 
     else:
         print("No changes")
+
+        
 
 if __name__ == "__main__":
     main()
