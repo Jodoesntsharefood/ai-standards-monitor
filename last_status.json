@@ -1,1 +1,172 @@
-{}
+{
+  "JT021019": {
+    "project": "EN 18274:2026",
+    "name": "Competence requirements for professional AI ethicists",
+    "status": "Approved"
+  },
+  "JT021039": {
+    "project": "EN 18286:2026",
+    "name": "Artificial intelligence - Quality management system for EU AI Act regulatory purposes",
+    "status": "Approved"
+  },
+  "JT021031": {
+    "project": "EN ISO/IEC 22989:2023/prA1:2025",
+    "name": "Information technology - Artificial intelligence - Artificial intelligence concepts and terminology - Amendment 1: Generative AI (ISO/IEC 22989:2022/DAmd1:2025)",
+    "status": "Under Approval"
+  },
+  "JT021054": {
+    "project": "EN ISO/IEC 22989:2023/prA2",
+    "name": "Information technology — Artificial intelligence — Artificial intelligence concepts and terminology — Amendment 2",
+    "status": "Under Drafting"
+  },
+  "JT021032": {
+    "project": "EN ISO/IEC 23053:2023/prA1:2025",
+    "name": "Framework for Artificial Intelligence (AI) Systems Using Machine Learning (ML) - Amendment 1: Generative AI (ISO/IEC 23053:2022/DAmd1:2025)",
+    "status": "Under Approval"
+  },
+  "JT021055": {
+    "project": "EN ISO/IEC 23053:2023/prA2",
+    "name": "Framework for Artificial Intelligence (AI) Systems Using Machine Learning (ML) — Amendment 2",
+    "status": "Under Drafting"
+  },
+  "JT021051": {
+    "project": "prCEN/CLC ISO/IEC/TS 22440-1",
+    "name": "Artificial Intelligence – Functional Safety and AI systems – Part 1: Requirements",
+    "status": "Under Drafting"
+  },
+  "JT021050": {
+    "project": "prCEN/CLC ISO/IEC/TS 22440-2",
+    "name": "Artificial intelligence — Functional safety and AI systems — Part 2: Guidance",
+    "status": "Under Drafting"
+  },
+  "JT021049": {
+    "project": "prCEN/CLC ISO/IEC/TS 22440-3",
+    "name": "Artificial intelligence — Functional safety and AI systems — Part 3: Examples of application",
+    "status": "Under Drafting"
+  },
+  "JT021052": {
+    "project": "prCEN/CLC/TR 18347",
+    "name": "Overview and architecture of standards in support of the EU AI Act",
+    "status": "Under Drafting"
+  },
+  "JT021009": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "AI Risks - Check List for AI Risks Management",
+    "status": "Preliminary"
+  },
+  "JT021026": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "Impact assessment in the context of the EU Fundamental Rights",
+    "status": "Preliminary"
+  },
+  "JT021053": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
+    "status": "Preliminary"
+  },
+  "JT021033": {
+    "project": "prCEN/TS",
+    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
+    "status": "Preliminary"
+  },
+  "JT021034": {
+    "project": "prCEN/TS",
+    "name": "Guidelines on tools for handling ethical issues in AI system life cycle",
+    "status": "Preliminary"
+  },
+  "JT021024": {
+    "project": "prEN 18228",
+    "name": "AI Risk Management",
+    "status": "Under Enquiry"
+  },
+  "JT021008": {
+    "project": "prEN 18229-1",
+    "name": "AI trustworthiness framework - Part 1: Logging",
+    "status": "Under Enquiry"
+  },
+  "JT021047": {
+    "project": "prEN 18229-2",
+    "name": "AI trustworthiness framework - Part 2: Accuracy and robustness",
+    "status": "Under Drafting"
+  },
+  "JT021056": {
+    "project": "prEN 18229-3",
+    "name": "AI trustworthiness framework – Part 3: Human oversight",
+    "status": "Under Drafting"
+  },
+  "JT021025": {
+    "project": "prEN 18281",
+    "name": "Artificial Intelligence - Evaluation methods for accurate computer vision systems",
+    "status": "Under Approval"
+  },
+  "JT021029": {
+    "project": "prEN 18282",
+    "name": "Artificial intelligence - Cybersecurity specifications for AI Systems",
+    "status": "Under Enquiry"
+  },
+  "JT021036": {
+    "project": "prEN 18283",
+    "name": "Artificial Intelligence - Concepts, measures and requirements for managing bias in AI systems",
+    "status": "Under Drafting"
+  },
+  "JT021037": {
+    "project": "prEN 18284",
+    "name": "Artificial Intelligence -- Quality and governance of datasets in AI",
+    "status": "Under Drafting"
+  },
+  "JT021038": {
+    "project": "prEN 18285",
+    "name": "AI Conformity assessment framework",
+    "status": "Under Drafting"
+  },
+  "JT021035": {
+    "project": "prEN 18287",
+    "name": "Artificial Intelligence – Requirements and guidance for the environmental impact evaluation of artificial intelligence systems and services",
+    "status": "Under Approval"
+  },
+  "JT021044": {
+    "project": "prEN 18288",
+    "name": "Artificial Intelligence - Taxonomy of AI tasks in computer vision",
+    "status": "Under Enquiry"
+  },
+  "JT021012": {
+    "project": "prEN ISO/IEC 23282",
+    "name": "Artificial Intelligence - Evaluation methods for accurate natural language processing systems",
+    "status": "Under Approval"
+  },
+  "JT021021": {
+    "project": "prEN ISO/IEC 24970",
+    "name": "Artificial intelligence - AI system logging (ISO/IEC DIS 24970:2025)",
+    "status": "Under Approval"
+  },
+  "JT021046": {
+    "project": "prEN ISO/IEC 25029",
+    "name": "Artificial intelligence - AI-enhanced nudging (ISO/IEC DIS 25029:2026)",
+    "status": "Under Enquiry"
+  },
+  "JT021027": {
+    "project": "prEN ISO/IEC 25059",
+    "name": "Software engineering - Systems and software Quality Requirements and Evaluation (SQuaRE) - Quality models for AI systems (ISO/IEC DIS 25059:2025)",
+    "status": "Under Approval"
+  },
+  "JT021057": {
+    "project": "prEN ISO/IEC 42006",
+    "name": "Information technology - Artificial intelligence - Requirements for bodies providing audit and certification of artificial intelligence management systems (ISO/IEC 42006:2025)",
+    "status": "Under Approval"
+  },
+  "JT021045": {
+    "project": "prEN ISO/IEC 42102",
+    "name": "Information technology - Artificial intelligence - Framework for characterizing AI system methods and capabilities (ISO/IEC DIS 42102:2026)",
+    "status": "Under Enquiry"
+  },
+  "JT021002": {
+    "project": "prEN ISO/IEC TR 23281",
+    "name": "Artificial Intelligence - Overview of Al tasks and functionalities related to natural language processing",
+    "status": "Under Drafting"
+  },
+  "JT021030": {
+    "project": "",
+    "name": "Contributions towards ISO/IEC 27090",
+    "status": "Preliminary"
+  }
+}
