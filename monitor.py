@@ -17,16 +17,26 @@ def get_current_statuses():
 
         page = browser.new_page()
 
-        page.goto(URL, wait_until="networkidle", timeout=120000)
+        page.goto(
+            URL,
+            wait_until="domcontentloaded",
+            timeout=120000
+        )
 
-        page.wait_for_timeout(8000)
+        # 等待表格数据真正出现
+        page.wait_for_selector(
+            "table tbody tr",
+            timeout=120000
+        )
 
-        # 获取所有表格行
-        rows = page.locator("table tr")
+        # 找到真正的数据表
+        table = page.locator("table").filter(
+            has=page.locator("th:text('Status')")
+        ).first
 
-        count = rows.count()
+        rows = table.locator("tbody tr")
 
-        print(f"Found rows: {count}")
+        print(f"Found rows: {rows.count()}")
 
         status_candidates = [
             "Preliminary",
@@ -35,40 +45,60 @@ def get_current_statuses():
             "Under Enquiry",
             "Published",
             "Withdrawn",
+            "Approved",
         ]
 
-        for i in range(count):
+        for i in range(rows.count()):
+
             row = rows.nth(i)
 
-            text = row.inner_text().strip()
+            tds = row.locator("td")
 
-            if not text:
+            if tds.count() < 2:
                 continue
 
-            columns = [c.strip() for c in text.split("\n") if c.strip()]
+            # -----------------------------
+            # 第一列(Project)
+            # -----------------------------
+            first_text = first_cell = tds.nth(0).inner_text()
 
-            if len(columns) < 2:
+            lines = [
+                x.strip()
+                for x in first_text.split("\n")
+                if x.strip()
+            ]
+
+            if len(lines) < 3:
                 continue
 
-            work_item = columns[0]
+            project = lines[0]
 
-            detected_status = None
+            wi = lines[1]
+            wi = wi.replace("(WI=", "").replace(")", "").strip()
 
-            for col in columns:
-                for status in status_candidates:
-                    if status.lower() in col.lower():
-                        detected_status = status
-                        break
+            name = " ".join(lines[2:])
 
-                if detected_status:
+            # -----------------------------
+            # Status
+            # -----------------------------
+            status = tds.nth(1).inner_text().strip()
+
+            for s in status_candidates:
+                if s.lower() in status.lower():
+                    status = s
                     break
 
-            if detected_status:
-                results[work_item] = detected_status
+            results[wi] = {
+                "project": project,
+                "wi": wi,
+                "name": name,
+                "status": status,
+            }
 
         browser.close()
 
     return results
+
 
 
 # 读取历史状态
@@ -92,35 +122,88 @@ def compare_statuses(old, new):
 
     all_keys = set(old.keys()) | set(new.keys())
 
-    for key in all_keys:
-        old_status = old.get(key)
-        new_status = new.get(key)
+    for key in sorted(all_keys):
+
+        old_item = old.get(key)
+        new_item = new.get(key)
+
+        old_status = old_item["status"] if old_item else None
+        new_status = new_item["status"] if new_item else None
 
         if old_status != new_status:
-            changes.append((key, old_status, new_status))
+
+            item = new_item if new_item else old_item
+
+            changes.append({
+                "wi": item.get("wi", ""),
+                "project": item.get("project", ""),
+                "name": item.get("name", ""),
+                "old_status": old_status,
+                "new_status": new_status,
+            })
 
     return changes
 
-
 # 发送邮件
 def send_email(changes):
+
     resend_api_key = os.environ["RESEND_API_KEY"]
 
-    to_emails = os.environ["TO_EMAILS"].split(",")
-    
-    html = "<h2>CEN/CLC/JTC 21 Status Changes</h2>"
+    to_emails = [
+        email.strip()
+        for email in os.environ["TO_EMAILS"].split(",")
+        if email.strip()
+    ]
 
-    for item, old_status, new_status in changes:
+    html = """
+    <h2>CEN/CLC/JTC 21 Status Changes</h2>
+    """
+
+    for change in changes:
+
         html += f"""
         <hr>
-        <p><strong>Item:</strong> {item}</p>
-        <p><strong>Old:</strong> {old_status}</p>
-        <p><strong>New:</strong> {new_status}</p>
+
+        <table style="border-collapse:collapse;">
+
+            <tr>
+                <td style="padding:4px 12px;"><strong>Project</strong></td>
+                <td>{change["project"]}</td>
+            </tr>
+
+            <tr>
+                <td style="padding:4px 12px;"><strong>WI</strong></td>
+                <td>{change["wi"]}</td>
+            </tr>
+
+            <tr>
+                <td style="padding:4px 12px;"><strong>Name</strong></td>
+                <td>{change["name"]}</td>
+            </tr>
+
+            <tr>
+                <td style="padding:4px 12px;"><strong>Old Status</strong></td>
+                <td>{change["old_status"]}</td>
+            </tr>
+
+            <tr>
+                <td style="padding:4px 12px;"><strong>New Status</strong></td>
+                <td>
+                    <span style="color:red;font-weight:bold;">
+                        {change["new_status"]}
+                    </span>
+                </td>
+            </tr>
+
+        </table>
         """
 
     html += f"""
-    <br>
-    <a href="{URL}">Open Standards Page</a>
+    <br><br>
+
+    <a href="{URL}">
+        Open CEN Work Programme
+    </a>
     """
 
     payload = {
@@ -145,6 +228,7 @@ def send_email(changes):
     print(response.text)
 
 
+    
 # 主程序
 def main():
     current_statuses = get_current_statuses()
@@ -172,7 +256,11 @@ def main():
         print("Changes detected:")
 
         for c in changes:
-            print(c)
+            print(
+                f"[{c['wi']}] "
+                f"{c['project']} | "
+                f"{c['old_status']} -> {c['new_status']}"
+            )
 
         send_email(changes)
 
