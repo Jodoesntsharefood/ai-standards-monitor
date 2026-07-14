@@ -23,19 +23,11 @@ def get_current_statuses():
 
         rows = page.locator("table tbody tr")
 
-        print(f"Found rows: {rows.count()}")
+        count = rows.count()
 
-        status_candidates = [
-            "Preliminary",
-            "Under Drafting",
-            "Under Approval",
-            "Under Enquiry",
-            "Published",
-            "Withdrawn",
-            "Approved",
-        ]
+        print(f"Found rows: {count}")
 
-        for i in range(rows.count()):
+        for i in range(count):
 
             row = rows.nth(i)
 
@@ -44,51 +36,72 @@ def get_current_statuses():
             if not text:
                 continue
 
-            columns = [c.strip() for c in text.split("\n") if c.strip()]
+            columns = [
+                c.strip()
+                for c in text.split("\n")
+                if c.strip()
+            ]
 
             # 跳过标题行
             if len(columns) < 3:
                 continue
 
-            # 第一列
+
+            # -------------------------
+            # 第一列:
+            # EN 18274:2026 (WI=JT021019)
+            # -------------------------
+
             project_line = columns[0]
 
-            # 提取 WI
-            wi = ""
+            if "(WI=" not in project_line:
+                continue
 
-            if "(WI=" in project_line:
-                wi = project_line.split("(WI=")[1].split(")")[0]
+            wi = (
+                project_line
+                .split("(WI=")[1]
+                .split(")")[0]
+                .strip()
+            )
 
-            # Project Reference
-            project = project_line.split("(WI=")[0].strip()
+            project = (
+                project_line
+                .split("(WI=")[0]
+                .strip()
+            )
 
-            # 第二列就是 Item Name
+
+            # -------------------------
+            # 第二列:
+            # Item Name
+            # -------------------------
+
             item_name = columns[1]
 
-            # 第三列：Status + 日期
-            status = columns[2].split("\t")[0].strip()
+
+            # -------------------------
+            # 第三列:
+            # Approved\tdate\tdate...
+            # -------------------------
+
+            status_line = columns[2]
+
+            status = (
+                status_line
+                .split("\t")[0]
+                .strip()
+            )
+
 
             results[wi] = {
                 "project": project,
                 "name": item_name,
                 "status": status,
             }
-            detected_status = None
 
-            for status in status_candidates:
-                if status.lower() in status_line.lower():
-                    detected_status = status
-                    break
-
-            if detected_status:
-
-                results[wi] = {
-                    "project": project,
-                    "name": item_name,
-                    "status": detected_status,
-                }
 
         browser.close()
+
 
     return results
 
