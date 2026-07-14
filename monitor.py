@@ -19,16 +19,25 @@ def get_current_statuses():
 
         page.goto(
             URL,
-            wait_until="domcontentloaded",
+            wait_until="networkidle",
             timeout=120000
         )
+
+        page.wait_for_timeout(5000)
 
         # 等待表格数据真正出现
         page.wait_for_selector(
             "table tbody tr",
             timeout=120000
         )
+        tables = page.locator("table")
 
+        print("Total tables:", tables.count())
+
+        for i in range(tables.count()):
+            print("======== TABLE", i, "========")
+            print(tables.nth(i).inner_text()[:300])
+            
         # 找到真正的数据表
         table = page.locator("table").filter(
             has=page.locator("th:text('Status')")
