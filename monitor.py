@@ -240,14 +240,14 @@ def send_email(changes):
     
 # 主程序
 def main():
-    current_statuses = get_current_statuses()
+    import requests
 
-    print("Current statuses:")
-    print(json.dumps(current_statuses, indent=2, ensure_ascii=False))
+    html = requests.get(URL).text
 
-    old_statuses = load_old_statuses()
-
-    changes = compare_statuses(old_statuses, current_statuses)
+    print("Length:", len(html))
+    print("(WI=" in html)
+    print("Approved" in html)
+    print(html[:1000])
 
 #    if changes:
 #        print("Changes detected:")
