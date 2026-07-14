@@ -19,15 +19,11 @@ def get_current_statuses():
 
         page.goto(URL, wait_until="networkidle", timeout=120000)
 
-        # 等待表格真正加载完成
         page.wait_for_selector("table tbody tr", timeout=120000)
 
-        # 获取所有表格行
         rows = page.locator("table tbody tr")
 
-        count = rows.count()
-
-        print(f"Found rows: {count}")
+        print(f"Found rows: {rows.count()}")
 
         status_candidates = [
             "Preliminary",
@@ -36,9 +32,10 @@ def get_current_statuses():
             "Under Enquiry",
             "Published",
             "Withdrawn",
+            "Approved",
         ]
 
-        for i in range(count):
+        for i in range(rows.count()):
 
             row = rows.nth(i)
 
@@ -49,41 +46,38 @@ def get_current_statuses():
 
             columns = [c.strip() for c in text.split("\n") if c.strip()]
 
-            print("=" * 80)
-            print(columns)
-            
+            # 跳过标题行
             if len(columns) < 3:
                 continue
 
-            # 第一行：Project Reference
-            project = columns[0]
+            # 第一列
+            project_line = columns[0]
 
-            # 第二行：(WI=JT021054)
+            # 提取 WI
             wi = ""
-            if columns[1].startswith("(WI="):
-                wi = columns[1].replace("(WI=", "").replace(")", "").strip()
 
-            # 第三行开始：Item Name
-            item_name_parts = []
+            if "(WI=" in project_line:
+                wi = project_line.split("(WI=")[1].split(")")[0]
 
-            for col in columns[2:]:
+            # Project Reference
+            project = project_line.split("(WI=")[0].strip()
 
-                # 遇到状态就停止
-                if any(status.lower() in col.lower() for status in status_candidates):
-                    break
+            # 第二列就是 Item Name
+            item_name = columns[1]
 
-                item_name_parts.append(col)
+            # 第三列：Status + 日期
+            status = columns[2].split("\t")[0].strip()
 
-            item_name = " ".join(item_name_parts)
+            results[wi] = {
+                "project": project,
+                "name": item_name,
+                "status": status,
+            }
             detected_status = None
 
-            for col in columns:
-                for status in status_candidates:
-                    if status.lower() in col.lower():
-                        detected_status = status
-                        break
-
-                if detected_status:
+            for status in status_candidates:
+                if status.lower() in status_line.lower():
+                    detected_status = status
                     break
 
             if detected_status:
