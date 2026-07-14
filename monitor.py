@@ -49,6 +49,9 @@ def get_current_statuses():
 
             columns = [c.strip() for c in text.split("\n") if c.strip()]
 
+            print("=" * 80)
+            print(columns)
+            
             if len(columns) < 3:
                 continue
 
