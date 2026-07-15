@@ -54,24 +54,24 @@
     "name": "AI Risks - Check List for AI Risks Management",
     "status": "Preliminary"
   },
-  "JT021026": {
-    "project": "prCEN/CLC/TR XXX",
-    "name": "Impact assessment in the context of the EU Fundamental Rights",
-    "status": "Preliminary"
-  },
   "JT021053": {
     "project": "prCEN/CLC/TR XXX",
     "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
     "status": "Preliminary"
   },
-  "JT021033": {
-    "project": "prCEN/TS",
-    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
+  "JT021026": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "Impact assessment in the context of the EU Fundamental Rights",
     "status": "Preliminary"
   },
   "JT021034": {
     "project": "prCEN/TS",
     "name": "Guidelines on tools for handling ethical issues in AI system life cycle",
+    "status": "Preliminary"
+  },
+  "JT021033": {
+    "project": "prCEN/TS",
+    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
     "status": "Preliminary"
   },
   "JT021024": {
@@ -86,12 +86,22 @@
   },
   "JT021047": {
     "project": "prEN 18229-2",
-    "name": "AI trustworthiness framework - Part 2: Accuracy and robustness",
+    "name": "AI trustworthiness framework – Part 2: Transparency",
     "status": "Under Drafting"
   },
   "JT021056": {
     "project": "prEN 18229-3",
     "name": "AI trustworthiness framework – Part 3: Human oversight",
+    "status": "Under Drafting"
+  },
+  "JT021058": {
+    "project": "prEN 18229-4",
+    "name": "AI trustworthiness framework – Part 4: Accuracy",
+    "status": "Under Drafting"
+  },
+  "JT021059": {
+    "project": "prEN 18229-5",
+    "name": "AI trustworthiness framework – Part 5: Robustness",
     "status": "Under Drafting"
   },
   "JT021025": {
