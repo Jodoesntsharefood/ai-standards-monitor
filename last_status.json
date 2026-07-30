@@ -44,14 +44,14 @@
     "name": "Overview and architecture of standards in support of the EU AI Act",
     "status": "Under Drafting"
   },
-  "JT021053": {
-    "project": "prCEN/CLC/TR XXX",
-    "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
-    "status": "Preliminary"
-  },
   "JT021026": {
     "project": "prCEN/CLC/TR XXX",
     "name": "Impact assessment in the context of the EU Fundamental Rights",
+    "status": "Preliminary"
+  },
+  "JT021053": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
     "status": "Preliminary"
   },
   "JT021009": {
@@ -72,7 +72,7 @@
   "JT021024": {
     "project": "prEN 18228",
     "name": "AI Risk Management",
-    "status": "Under Enquiry"
+    "status": "Under Approval"
   },
   "JT021008": {
     "project": "prEN 18229-1",
@@ -81,13 +81,13 @@
   },
   "JT021047": {
     "project": "prEN 18229-2",
-    "name": "AI trustworthiness framework – Part 2: Transparency",
+    "name": "AI trustworthiness framework - Part 2: Transparency",
     "status": "Under Drafting"
   },
   "JT021056": {
     "project": "prEN 18229-3",
     "name": "AI trustworthiness framework - Part 3: Human oversight",
-    "status": "Under Approval"
+    "status": "Under Enquiry"
   },
   "JT021058": {
     "project": "prEN 18229-4",
@@ -107,7 +107,7 @@
   "JT021029": {
     "project": "prEN 18282",
     "name": "Artificial intelligence - Cybersecurity specifications for AI Systems",
-    "status": "Under Enquiry"
+    "status": "Under Approval"
   },
   "JT021036": {
     "project": "prEN 18283",
