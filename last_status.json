@@ -1,9 +1,4 @@
 {
-  "JT021019": {
-    "project": "EN 18274:2026",
-    "name": "Competence requirements for professional AI ethicists",
-    "status": "Approved"
-  },
   "JT021031": {
     "project": "EN ISO/IEC 22989:2023/prA1:2025",
     "name": "Information technology - Artificial intelligence - Artificial intelligence concepts and terminology - Amendment 1: Generative AI (ISO/IEC 22989:2022/DAmd1:2025)",
@@ -59,14 +54,14 @@
     "name": "AI Risks - Check List for AI Risks Management",
     "status": "Preliminary"
   },
-  "JT021033": {
-    "project": "prCEN/TS",
-    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
-    "status": "Preliminary"
-  },
   "JT021034": {
     "project": "prCEN/TS",
     "name": "Guidelines on tools for handling ethical issues in AI system life cycle",
+    "status": "Preliminary"
+  },
+  "JT021033": {
+    "project": "prCEN/TS",
+    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
     "status": "Preliminary"
   },
   "JT021024": {
