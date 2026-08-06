@@ -39,14 +39,14 @@
     "name": "Overview and architecture of standards in support of the EU AI Act",
     "status": "Under Drafting"
   },
-  "JT021026": {
-    "project": "prCEN/CLC/TR XXX",
-    "name": "Impact assessment in the context of the EU Fundamental Rights",
-    "status": "Preliminary"
-  },
   "JT021053": {
     "project": "prCEN/CLC/TR XXX",
     "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
+    "status": "Preliminary"
+  },
+  "JT021026": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "Impact assessment in the context of the EU Fundamental Rights",
     "status": "Preliminary"
   },
   "JT021009": {
@@ -152,7 +152,7 @@
   "JT021057": {
     "project": "prEN ISO/IEC 42006",
     "name": "Information technology - Artificial intelligence - Requirements for bodies providing audit and certification of artificial intelligence management systems (ISO/IEC 42006:2025)",
-    "status": "Under Approval"
+    "status": "Under Enquiry"
   },
   "JT021045": {
     "project": "prEN ISO/IEC 42102",
