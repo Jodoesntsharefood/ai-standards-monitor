@@ -19,6 +19,11 @@
     "name": "Framework for Artificial Intelligence (AI) Systems Using Machine Learning (ML) — Amendment 2",
     "status": "Under Drafting"
   },
+  "JT021021": {
+    "project": "FprEN ISO/IEC 24970",
+    "name": "Artificial intelligence - AI system logging (ISO/IEC FDIS 24970:2026)",
+    "status": "Under Approval"
+  },
   "JT021051": {
     "project": "prCEN/CLC ISO/IEC/TS 22440-1",
     "name": "Artificial Intelligence – Functional Safety and AI systems – Part 1: Requirements",
@@ -54,14 +59,14 @@
     "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
     "status": "Preliminary"
   },
-  "JT021034": {
-    "project": "prCEN/TS",
-    "name": "Guidelines on tools for handling ethical issues in AI system life cycle",
-    "status": "Preliminary"
-  },
   "JT021033": {
     "project": "prCEN/TS",
     "name": "Guidance for upskilling organisations on AI ethics and social concerns",
+    "status": "Preliminary"
+  },
+  "JT021034": {
+    "project": "prCEN/TS",
+    "name": "Guidelines on tools for handling ethical issues in AI system life cycle",
     "status": "Preliminary"
   },
   "JT021024": {
@@ -131,13 +136,8 @@
   },
   "JT021012": {
     "project": "prEN ISO/IEC 23282",
-    "name": "Artificial Intelligence - Evaluation methods for accurate natural language processing systems",
-    "status": "Under Approval"
-  },
-  "JT021021": {
-    "project": "prEN ISO/IEC 24970",
-    "name": "Artificial intelligence - AI system logging (ISO/IEC DIS 24970:2025)",
-    "status": "Under Approval"
+    "name": "Artificial Intelligence - Evaluation methods for accurate natural language processing systems (ISO/IEC DIS 23282:2026)",
+    "status": "Under Enquiry"
   },
   "JT021046": {
     "project": "prEN ISO/IEC 25029",
