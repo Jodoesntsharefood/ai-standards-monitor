@@ -59,14 +59,14 @@
     "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
     "status": "Preliminary"
   },
-  "JT021033": {
-    "project": "prCEN/TS",
-    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
-    "status": "Preliminary"
-  },
   "JT021034": {
     "project": "prCEN/TS",
     "name": "Guidelines on tools for handling ethical issues in AI system life cycle",
+    "status": "Preliminary"
+  },
+  "JT021033": {
+    "project": "prCEN/TS",
+    "name": "Guidance for upskilling organisations on AI ethics and social concerns",
     "status": "Preliminary"
   },
   "JT021024": {
@@ -116,7 +116,7 @@
   },
   "JT021037": {
     "project": "prEN 18284",
-    "name": "Artificial Intelligence -- Quality and governance of datasets in AI",
+    "name": "Artificial Intelligence - Quality and governance of data sets in AI",
     "status": "Under Drafting"
   },
   "JT021038": {
@@ -142,7 +142,7 @@
   "JT021046": {
     "project": "prEN ISO/IEC 25029",
     "name": "Artificial intelligence - AI-enhanced nudging (ISO/IEC DIS 25029:2026)",
-    "status": "Under Enquiry"
+    "status": "Under Approval"
   },
   "JT021027": {
     "project": "prEN ISO/IEC 25059",
@@ -157,7 +157,7 @@
   "JT021045": {
     "project": "prEN ISO/IEC 42102",
     "name": "Information technology - Artificial intelligence - Framework for characterizing AI system methods and capabilities (ISO/IEC DIS 42102:2026)",
-    "status": "Under Enquiry"
+    "status": "Under Approval"
   },
   "JT021002": {
     "project": "prEN ISO/IEC TR 23281",
