@@ -44,6 +44,11 @@
     "name": "Overview and architecture of standards in support of the EU AI Act",
     "status": "Under Drafting"
   },
+  "JT021053": {
+    "project": "prCEN/CLC/TR XXX",
+    "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
+    "status": "Preliminary"
+  },
   "JT021009": {
     "project": "prCEN/CLC/TR XXX",
     "name": "AI Risks - Check List for AI Risks Management",
@@ -52,11 +57,6 @@
   "JT021026": {
     "project": "prCEN/CLC/TR XXX",
     "name": "Impact assessment in the context of the EU Fundamental Rights",
-    "status": "Preliminary"
-  },
-  "JT021053": {
-    "project": "prCEN/CLC/TR XXX",
-    "name": "Guidance on application of Risk Management in Critical Digital Infrastructure",
     "status": "Preliminary"
   },
   "JT021034": {
@@ -87,7 +87,7 @@
   "JT021056": {
     "project": "prEN 18229-3",
     "name": "AI trustworthiness framework - Part 3: Human oversight",
-    "status": "Under Enquiry"
+    "status": "Under Approval"
   },
   "JT021058": {
     "project": "prEN 18229-4",
